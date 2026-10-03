@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>R.K APP - New Year 2027</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FF1744;
+            --secondary-color: #00E5FF;
+            --accent-color: #FFD600;
+            --dark-bg: #0a0e27;
+            --card-bg: #151a35;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b7c3;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f3a 50%, #0f1429 100%);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .background-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .float-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--primary-color), transparent);
+            border-radius: 50%;
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+        }
+
+        .float-2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--secondary-color), transparent);
+            border-radius: 50%;
+            bottom: -125px;
+            right: -125px;
+            animation-delay: 5s;
+        }
+
+        .float-3 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--accent-color), transparent);
+            border-radius: 50%;
+            top: 50%;
+            right: 10%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+            }
+            25% {
+                transform: translateY(-30px) translateX(20px);
+            }
+            50% {
+                transform: translateY(-60px) translateX(-20px);
+            }
+            75% {
+                transform: translateY(-30px) translateX(20px);
+            }
+        }
+
+        /* Particle effects */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: sparkle 3s ease-out forwards;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty))) scale(0);
+            }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 100%;
+            height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* App header */
+        .app-header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+
+        .app-name {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Main content */
+        .content {
+            width: 100%;
+            max-width: 500px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Heading */
+        .main-heading {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+            }
+        }
+
+        /* Date display */
+        .date-display {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            animation: slideUp 1s ease-out 0.2s backwards;
+        }
+
+        /* Animated message */
+        .animated-message {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 40px 0;
+            animation: bounce 1.5s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 23, 68, 0.6);
+            letter-spacing: 2px;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-15px) scale(1.05);
+                opacity: 0.9;
+            }
+        }
+
+        /* Countdown timer */
+        .countdown-container {
+            background: rgba(21, 26, 53, 0.8);
+            border: 2px solid var(--secondary-color);
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 229, 255, 0.2);
+            animation: slideUp 1s ease-out 0.4s backwards;
+        }
+
+        .countdown-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-value {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 8px;
+            min-width: 60px;
+            text-align: center;
+            animation: pulse-number 1s ease-in-out;
+        }
+
+        @keyframes pulse-number {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .countdown-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            margin-top: 40px;
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(255, 23, 68, 0.4);
+            animation: slideUp 1s ease-out 0.6s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(255, 23, 68, 0.6);
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            z-index: 10;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-heading {
+                font-size: 36px;
+            }
+
+            .animated-message {
+                font-size: 24px;
+            }
+
+            .countdown-grid {
+                gap: 10px;
+            }
+
+            .countdown-value {
+                font-size: 32px;
+                min-width: 50px;
+            }
+
+            .countdown-label {
+                font-size: 11px;
+            }
+
+            .app-name {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .main-heading {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+
+            .animated-message {
+                font-size: 20px;
+                margin: 30px 0;
+            }
+
+            .countdown-container {
+                padding: 20px 15px;
+                margin: 20px 0;
+            }
+
+            .countdown-grid {
+                gap: 8px;
+            }
+
+            .countdown-value {
+                font-size: 28px;
+                min-width: 45px;
+            }
+
+            .countdown-label {
+                font-size: 10px;
+            }
+
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 14px;
+                margin-top: 30px;
+            }
+
+            .app-header {
+                top: 15px;
+                left: 15px;
+                right: 15px;
+            }
+
+            .app-name {
+                font-size: 18px;
+            }
+        }
+
+        /* Landscape mode adjustments */
+        @media (max-height: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .main-heading {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .animated-message {
+                font-size: 18px;
+                margin: 15px 0;
+            }
+
+            .countdown-container {
+                padding: 15px 10px;
+                margin: 15px 0;
+            }
+
+            .countdown-value {
+                font-size: 24px;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background animations -->
+    <div class="background-elements">
+        <div class="floating-element float-1"></div>
+        <div class="floating-element float-2"></div>
+        <div class="floating-element float-3"></div>
+    </div>
+
+    <!-- App header -->
+    <div class="app-header">
+        <div class="app-name">R.K APP</div>
+    </div>
+
+    <!-- Main container -->
+    <div class="container">
+        <div class="content">
+            <!-- Main heading -->
+            <div class="main-heading">🎆 NEW YEAR 2027 🎆</div>
+
+            <!-- Date display -->
+            <div class="date-display">01 JANUARY 2027</div>
+
+            <!-- Animated message -->
+            <div class="animated-message">🔥 कुछ बहुत बड़ा होने वाला है… 🔥</div>
+
+            <!-- Countdown timer -->
+            <div class="countdown-container">
+                <div class="countdown-title">Countdown to Midnight</div>
+                <div class="countdown-grid">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <button class="cta-button">Get Notified</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2024 R.K APP | Something Big is Coming...</p>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Countdown timer function
+        function updateCountdown() {
+            // Target date: January 1, 2027, 12:00 AM (midnight)
+            const targetDate = new Date('2027-01-01T00:00:00').getTime();
+            
+            // Get current time
+            const now = new Date().getTime();
+            
+            // Calculate time difference
+            const timeDiff = targetDate - now;
+            
+            // Calculate days, hours, minutes, seconds
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            // Update DOM elements with proper padding
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            
+            // If countdown is complete
+            if (timeDiff < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+        
+        // Update countdown immediately on load
+        updateCountdown();
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+
+        // Particle effect on interaction
+        document.addEventListener('click', function(e) {
+            createParticles(e.clientX, e.clientY);
+        });
+
+        function createParticles(x, y) {
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                
+                const angle = (i / 5) * Math.PI * 2;
+                const velocity = 100 + Math.random() * 100;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+                
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 3000);
+            }
+        }
+
+        // CTA Button click handler
+        document.querySelector('.cta-button').addEventListener('click', function() {
+            alert('🎉 You will be notified on New Year 2027! 🎉');
+        });
+    </script>
+</body>
+</html>
